@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 /* Constants */
 import COLORS from "../../constants/colors";
@@ -11,7 +11,6 @@ const NumberContainer = (props) => {
       <View style={styles.container}>
         <Text style={styles.text}>{children}</Text>
       </View>
-      <Button title="Start Game" />
     </>
   );
 };

@@ -18,6 +18,9 @@ import NumberContainer from "../../components/NumberContainer";
 import COLORS from "../../constants/colors";
 
 const HomeScreen = (props) => {
+
+  const {startGame}=props;
+
   const [enteredValue, setEnteredValue] = useState("");
   const [hasUserConfirmed, setHasUserConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState(0);
@@ -46,6 +49,7 @@ const HomeScreen = (props) => {
     setSelectedNumber(chosenNumber);
     setEnteredValue("");
     Keyboard.dismiss();
+  
   };
 
   let confirmedDisplay = undefined;
@@ -54,6 +58,7 @@ const HomeScreen = (props) => {
       <Card customStyles={styles.confirmContainer}>
         <Text style={{fontSize:20}}>You selected</Text>
        <NumberContainer>{selectedNumber}</NumberContainer>
+       <Button title="Start Game" onPress={()=>startGame(selectedNumber)}/>
       </Card>
     );
   }
