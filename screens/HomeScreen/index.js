@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 10,
+    fontFamily:'open-sans'
   },
   inputContainer: {
     width: "90%",
@@ -129,7 +130,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   text: {
-    fontSize:15
+    fontSize:18,
+    fontFamily:'open-sans'
   },
   btnContainer: {
     flexDirection: "row",

@@ -69,10 +69,10 @@ const GameScreen = (props) => {
     }
   }, [currentGuess,onGameOver,userChoice]);
 
-  
+
   return (
     <View style={styles.screen}>
-      <Text style={{ fontSize: 25, marginTop: 20 }}>Opponent's guess:</Text>
+      <Text style={{ fontSize: 25, marginTop: 20, fontFamily:'open-sans' }}>Opponent's guess:</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card customStyles={styles.buttonContainer}>
         <Button
