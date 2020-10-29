@@ -13,6 +13,7 @@ import {
 import Card from "../../components/Card";
 import Input from "../../components/Input";
 import NumberContainer from "../../components/NumberContainer";
+import CustomButton from "../../components/CustomButton";
 
 /* Constants */
 import COLORS from "../../constants/colors";
@@ -58,7 +59,7 @@ const HomeScreen = (props) => {
       <Card customStyles={styles.confirmContainer}>
         <Text style={{fontSize:20}}>You selected</Text>
        <NumberContainer>{selectedNumber}</NumberContainer>
-       <Button title="Start Game" onPress={()=>startGame(selectedNumber)}/>
+       <CustomButton  onClick={()=>startGame(selectedNumber)}>Start Game</CustomButton>
       </Card>
     );
   }

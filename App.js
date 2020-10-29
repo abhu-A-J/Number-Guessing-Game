@@ -48,11 +48,6 @@ export default function App() {
 
   let content = <HomeScreen startGame={setUserNumber} />;
 
-  content =  <GameOverScreen
-      numberOfRounds={1}
-      guessedNumber={1}
-      startNewGame={configureNewGame}
-    />;
 
   if (userNumber && guessRounds <= 0) {
     content = <GameScreen userChoice={userNumber} onGameOver={gameOver} />;
