@@ -4,27 +4,66 @@ import {
   View,
   Text,
   Button,
-	TouchableWithoutFeedback,
-	Keyboard
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
 } from "react-native";
 
 /* Child Components */
 import Card from "../../components/Card";
 import Input from "../../components/Input";
+import NumberContainer from "../../components/NumberContainer";
 
 /* Constants */
 import COLORS from "../../constants/colors";
 
 const HomeScreen = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
+  const [hasUserConfirmed, setHasUserConfirmed] = useState(false);
+  const [selectedNumber, setSelectedNumber] = useState(0);
 
   /* Methos to handle on change of text input*/
   const handleChange = (textInput) => {
     setEnteredValue(textInput.replace(/[^0-9]/g, ""));
   };
 
+  /* Method to handle reset of number */
+  const handleReset = () => {
+    setEnteredValue("");
+    setHasUserConfirmed(false);
+  };
+
+  /* Method to handle Confirm*/
+  const handleConfirm = () => {
+    const chosenNumber = parseInt(enteredValue);
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+      Alert.alert("Invalid Number", "Number has to be netween 1-99", [
+        { text: "Ok", style: "destructive", onPress: handleReset },
+      ]);
+      return;
+    }
+    setHasUserConfirmed(true);
+    setSelectedNumber(chosenNumber);
+    setEnteredValue("");
+    Keyboard.dismiss();
+  };
+
+  let confirmedDisplay = undefined;
+  if (hasUserConfirmed) {
+    confirmedDisplay = (
+      <Card customStyles={styles.confirmContainer}>
+        <Text style={{fontSize:20}}>You selected</Text>
+       <NumberContainer>{selectedNumber}</NumberContainer>
+      </Card>
+    );
+  }
+
   return (
-    <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
       <View style={styles.screen}>
         <Text style={styles.title}>Start a New Game!</Text>
 
@@ -42,13 +81,22 @@ const HomeScreen = (props) => {
           />
           <View style={styles.btnContainer}>
             <View style={styles.button}>
-              <Button title="Reset" color={COLORS.accent} />
+              <Button
+                title="Reset"
+                color={COLORS.accent}
+                onPress={handleReset}
+              />
             </View>
             <View style={styles.button}>
-              <Button title="Confirm" color={COLORS.primary} />
+              <Button
+                title="Confirm"
+                color={COLORS.primary}
+                onPress={handleConfirm}
+              />
             </View>
           </View>
         </Card>
+        {confirmedDisplay}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -75,7 +123,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     textAlign: "center",
   },
-  text: {},
+  text: {
+    fontSize:15
+  },
   btnContainer: {
     flexDirection: "row",
     width: "100%",
@@ -85,6 +135,12 @@ const styles = StyleSheet.create({
   button: {
     width: 80,
   },
+  confirmContainer:{
+    marginVertical:30,
+    padding:40,
+    maxWidth:"70%",
+    alignItems:"center"
+  }
 });
 
 export default HomeScreen;
